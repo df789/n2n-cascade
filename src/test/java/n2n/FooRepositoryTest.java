@@ -48,6 +48,11 @@ public class FooRepositoryTest {
 		bar = barRepository.save(bar);
 		long fooId = foo.getId();
 		long barId = bar.getId();
+		// Note the flush/clear here is just a trick to send the
+		//   current changes to the DB, and start the Session
+		//   in the EntityManager over
+		// - as if the changes above were in different transaction
+		//   to the one below, but without actually committing anything
 		entityManager.flush();
 		entityManager.clear();
 
